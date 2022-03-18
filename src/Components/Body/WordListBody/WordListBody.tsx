@@ -29,8 +29,10 @@ const WordBlock = ({word} : WordProps) : JSX.Element => {
     
     // TODO: Display the start of the definition
     return (
-        <div className="row">
-            <span onClick={handleWordClick} style={{flex: '1 1 auto'}}>{word.word} {word.definition ? '- ...' : ''}</span>
+        <div className="row" style={{maxWidth: '100vw'}}>
+            <span onClick={handleWordClick} style={{flex: '1 1 auto', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap'}}>
+                {word.word} - {word.definition}
+            </span>
             <button onClick={handleWordRemove}>X</button>
         </div>
     )
@@ -60,6 +62,7 @@ export default function WordListBody() {
             }]
         }))
         setNewWord("")
+        setNewDefinition("")
     }
     
     return (
