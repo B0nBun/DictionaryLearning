@@ -1,12 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import './reset.css';
+import './utils.css';
+import App from './Components/App/App';
+import GameStateProvider, { GameStatus } from './Providers/GameState'
 import reportWebVitals from './reportWebVitals';
+import WordStorageProvider from './Providers/WordStorage';
+import PageProvider from './Providers/PageProvider';
 
 ReactDOM.render(
   <React.StrictMode>
+  <GameStateProvider state={{
+    playingWords : [],
+    status : GameStatus.NotPlaying
+  }}>
+  <WordStorageProvider>
+  <PageProvider>
     <App />
+  </PageProvider>
+  </WordStorageProvider>
+  </GameStateProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

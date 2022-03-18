@@ -1,0 +1,45 @@
+.App {
+    min-height: 100vh;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #2f2f2f;
+    color: #f0f6f0;
+}
+
+.main-header button.goback {
+    width: 2rem;
+}
+
+.main-header .page-name {
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+.main-header .spacer {
+    width: 2rem;
+    background-color: red;
+}
+
+.main-body {
+    flex: 1 1 auto;
+    overflow-y: scroll
+}
+
+.main-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-footer > * {
+    flex: 1;
+    text-align: center;
+}
