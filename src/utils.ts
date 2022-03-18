@@ -40,4 +40,7 @@ export const shuffle = <T>(a : T[]) : T[] => {
 export const wordCmp = (a : Word, b : Word) => 
     a.word < b.word   ? -1 :
     a.word === b.word ?  0 :
-    1
+    1;
+
+export const filterBySearch = (words : Word[], search : string) =>
+    words.filter(word => word.word.match(search))
