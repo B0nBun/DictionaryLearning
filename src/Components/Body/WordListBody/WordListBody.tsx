@@ -50,14 +50,14 @@ export default function WordListBody() {
     const handleAdd = (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (!newWord) return
-        if (wordsState.words.some(word => word.word === newWord)) {
+        if (wordsState.words.some(word => word.word.toUpperCase() === newWord.toUpperCase())) {
             setError("You can't add same words")
             return
         }
         setWordsState(state => ({
             ...state,
             words : [...state.words, {
-                word : newWord,
+                word : newWord.toLowerCase(),
                 definition: newDefinition
             }]
         }))
