@@ -120,10 +120,6 @@ textarea.inpt {
     bottom: 0;
 }
 
-.main-footer > * {
-    flex: 1;
-    text-align: center;
-}
 
 .footer-button {
     background-color: var(--background-clr);
@@ -132,10 +128,13 @@ textarea.inpt {
     border-top: 5px solid transparent;
     font-size: 1.2rem;
     font-weight: bold;
-    padding-top: .2em;
+    padding-top: .4em;
+    padding-bottom: .4em;
     padding-left: 0;
     padding-right: 0;
     cursor: pointer;
+    flex: 1;
+    text-align: center;
 
     transition:
         color .2s ease,
