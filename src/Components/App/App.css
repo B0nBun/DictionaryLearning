@@ -51,6 +51,16 @@
     outline: none;
 }
 
+/* Body */
+
+.main-body {
+    flex: 1 1 auto;
+    overflow-y: scroll;
+    padding-top: 1rem;
+}
+
+/* Header */
+
 .main-header {
     display: flex;
     flex-direction: row;
@@ -58,6 +68,78 @@
     justify-content: center;
     background-color: var(--primary-clr);
     color: var(--on-primary-clr);
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    height: 2em;
+    padding-left: .5rem;
+    padding-right: .5rem;
+}
+
+.main-header .goback {
+    font-size: 1.4rem;
+    font-weight: bolder;
+    background-color: transparent;
+    color: var(--on-primary-clr);
+    border: none;
+    cursor: pointer;
+    width: 2rem;
+    transition: color .2s ease;
+}
+
+.main-header .goback:hover,
+.main-header .goback:focus {
+    color: var(--secondary-clr);
+}
+
+.main-header .page-name {
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+.main-header .spacer {
+    width: 2rem;
+    background-color: red;
+}
+
+/* Footer */
+
+.main-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-footer > * {
+    flex: 1;
+    text-align: center;
+}
+
+.footer-button {
+    background-color: transparent;
+    color: var(--secondary-clr);
+    border: none;
+    border-top: 5px solid transparent;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding-top: .2em;
+    cursor: pointer;
+
+    transition:
+        color .2s ease,
+        border .2s ease;
+}
+
+.footer-button.active,
+.footer-button:hover,
+.footer-button:active,
+.footer-button:focus {
+    border-top: 5px solid var(--secondary-clr);
+}
+
+.footer-button:hover {
+    color: var(--on-background-color);
+    border-color: var(--on-background-color);
 }
 
 /* Word List Page */
@@ -132,34 +214,4 @@
     max-width: 2em;
     min-height: 2em;
     max-height: 2em;
-}
-
-.main-header button.goback {
-    width: 2rem;
-}
-
-.main-header .page-name {
-    flex: 1 1 auto;
-    text-align: center;
-}
-
-.main-header .spacer {
-    width: 2rem;
-    background-color: red;
-}
-
-.main-body {
-    flex: 1 1 auto;
-    overflow-y: scroll;
-}
-
-.main-footer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.main-footer > * {
-    flex: 1;
-    text-align: center;
 }
