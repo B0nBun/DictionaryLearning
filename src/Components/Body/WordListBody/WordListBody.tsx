@@ -9,7 +9,7 @@ interface WordProps {
 }
 
 const WordBlock = ({word} : WordProps) : JSX.Element => {
-    const [currentPage, setCurrentPage] = useContext(pageContext)
+    const [, setCurrentPage] = useContext(pageContext)
     const [wordsState, setWordsState] = useContext(wordStorageContext)
     
     const handleWordClick = () => {
@@ -67,6 +67,14 @@ export default function WordListBody() {
         }
         if (newWord.match(/[<>|]/)) {
             setError("`< > |` symbols are reserved, you can't use them in words")
+            return
+        }
+        if (newWord.length === 0) {
+            setError("Word can't be empty")
+            return
+        }
+        if (newDefinition.length === 0) {
+            setError("Definition can't be empty")
             return
         }
         setWordsState({

@@ -27,7 +27,7 @@ export default function WordStorageProvider({children} : Props) {
     })
 
     const setWordsStateLS = (wordState : WordState) => {
-        wordState.words = wordState.words.filter(word => word.word.length > 0)
+        wordState.words = wordState.words.filter(word => word.word.length > 0 && word.definition.length > 0)
         setWordsToLs(wordState.words)
         setWordsState(wordState)
     }

@@ -1,6 +1,4 @@
 import React, { useContext } from "react"
-import { Page } from "../../../interfaces"
-import { pageContext } from "../../../Providers/PageProvider"
 import { wordStorageContext } from "../../../Providers/WordStorage"
 
 // TODO: `go back` button on android won't work so search for some event handler, idk
@@ -14,7 +12,7 @@ export default function WordEditBody() {
         setWordsState({
             currentWord: {
                 ...wordsState.currentWord!,
-                definition : wordsState.currentWord!.definition
+                word : e.currentTarget.value
             },
             words: wordsState.words.map(word => {
                 if (word.word === wordsState.currentWord!.word) {
@@ -46,11 +44,14 @@ export default function WordEditBody() {
             })
         })
     }    
-    
     return (
         <div className="column">
             <input onChange={handleWordChange} type="text" value={wordsState.currentWord.word}/>
             <input onChange={handleDefinitionChange} type="text" value={wordsState.currentWord.definition} />
+            {
+            wordsState.currentWord.definition.length === 0 ?
+            <span>Warning: Word will be deleted if it's defenition will be left empty</span> : ""
+            }
         </div>
     ) 
 }

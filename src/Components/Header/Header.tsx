@@ -9,7 +9,7 @@ export default function Header() {
     
     useEffect(() => {
         const goBackKeyboard = (e : KeyboardEvent) => {
-            if (e.key !== 'Escape' && e.key !== 'Backspace') return
+            if (e.key !== 'Escape') return
             goBack()
         }
 
