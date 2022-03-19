@@ -55,7 +55,6 @@ const WordBlock = ({word} : WordProps) : JSX.Element => {
 
 // TODO: `go back up` button
 // TODO: Think about where to put reset button (maybe in some submenu)
-// TODO: Make included and excluded with proper icons from html entities
 export default function WordListBody() {
     const [wordsState, setWordsState] = useContext(wordStorageContext)
     
@@ -64,6 +63,25 @@ export default function WordListBody() {
     const [search, setSearch] = useState("")
     
     const [error, setError] = useState("")
+    const [canGoUp, setCanGoUp] = useState(false)
+
+    const handleGoBackButton = () => {
+        window.scrollTo(0, 0)
+    }
+
+    const handleScroll = (e : Event) => {
+        if (window.scrollY > 100) {
+            setCanGoUp(true)
+            return
+        }
+        setCanGoUp(false)
+    }
+    
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll)
+
+        return () => window.removeEventListener('scroll', handleScroll)
+    })
 
     const handleAdd = (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -97,6 +115,7 @@ export default function WordListBody() {
     
     return (
         <div className="column word-list-body">
+            {canGoUp ? <div onClick={handleGoBackButton} className="goup-btn">^</div> : ''}
             <input onChange={e => setSearch(e.currentTarget.value)} value={search} className="search inpt" type="text" placeholder="Search"/>
             {
                 error ? <div className="error">{error}</div> : ''

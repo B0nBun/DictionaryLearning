@@ -5,6 +5,8 @@
     --on-primary-clr: #111;
     --primary-clr: #99D6EA;
     --on-secondary-clr: #111;
+
+    scroll-behavior: smooth;
 }
 
 .App {
@@ -256,6 +258,30 @@ textarea.inpt {
     background-color: var(--secondary-clr);
     color: var(--on-secondary-clr);
     border-color: transparent;
+}
+
+.goup-btn {
+    position: fixed;
+    left: 1.5rem;
+    bottom: 3rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: .5rem;
+    background-color: hsl(0, 70%, 65%);
+    color: #fff;
+    opacity: .5;
+    z-index: 100;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity .2s ease;
+}
+
+.goup-btn:hover,
+.goup-btn:focus {
+    opacity: .8
 }
 
 /* Word Edit */
