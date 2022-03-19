@@ -9,7 +9,6 @@
 
 .App {
     min-height: 100vh;
-    max-height: 100vh;
     display: flex;
     flex-direction: column;
     background-color: var(--background-clr);
@@ -407,4 +406,14 @@ textarea.inpt {
     font-size: 2rem;
     color: var(--secondary-clr);
     text-align: center;
+}
+
+@media (max-width: 300px) {
+    :root {
+        font-size: 14px;
+    }
+
+    .word-list-body {
+        padding: .5rem;
+    }
 }
