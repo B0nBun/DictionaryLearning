@@ -59,7 +59,6 @@ const getDefinitionJSX = (gameState : GameState, setGameState : (gameState : Gam
     )
 }
 
-// TODO: Filter words with no definition
 export default function PlayingBody() {
     const [gameState, setGameState] = useContext(gameStateContext)
     const [wordsState] = useContext(wordStorageContext)

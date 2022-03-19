@@ -46,7 +46,7 @@ export const wordCmp = (a : Word, b : Word) =>
     1;
 
 export const filterBySearch = (words : Word[], search : string) =>
-    words.filter(word => word.word.match(search))
+    words.filter(word => word.word.toUpperCase().match(search.toUpperCase()))
 
 export const getGameMode = () : GameMode => {
     if (!localStorage.getItem('gamemode')) {
