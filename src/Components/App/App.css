@@ -1,9 +1,9 @@
 :root {
     --background-clr: #1B1D36;
     --on-background-color: #E1E7EC;
-    --primary-clr: #FCA6D1;
-    --on-primary-clr: #333;
-    --secondary-clr: #99D6EA;
+    --secondary-clr: #FCA6D1;
+    --on-primary-clr: #111;
+    --primary-clr: #99D6EA;
     --on-secondary-clr: #111;
 }
 
@@ -18,8 +18,8 @@
 .inpt {
     background-color: transparent;
     border: none;
-    border-bottom: 2px var(--secondary-clr) solid;
-    color: var(--secondary-clr);
+    border-bottom: 2px var(--primary-clr) solid;
+    color: var(--primary-clr);
 }
 
 textarea.inpt {
@@ -37,10 +37,10 @@ textarea.inpt {
 
 .btn {
     background-color: var(--background-clr);
-    color: var(--secondary-clr);
+    color: var(--primary-clr);
     font-weight: bolder;
     padding: .3em .5em;
-    border: 2px solid var(--secondary-clr);
+    border: 2px solid var(--primary-clr);
     border-radius: .4em;
     cursor: pointer;
     transition:
@@ -52,8 +52,8 @@ textarea.inpt {
 .btn:focus,
 .btn:active,
 .btn.active {
-    background-color: var(--secondary-clr);
-    color: var(--on-secondary-clr);
+    background-color: var(--primary-clr);
+    color: var(--on-primary-clr);
     outline: none;
 }
 
@@ -74,8 +74,8 @@ textarea.inpt {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-color: var(--primary-clr);
-    color: var(--on-primary-clr);
+    background-color: var(--secondary-clr);
+    color: var(--on-secondary-clr);
     font-size: 1.5rem;
     font-weight: bold;
     text-transform: uppercase;
@@ -88,7 +88,7 @@ textarea.inpt {
     font-size: 1.4rem;
     font-weight: bolder;
     background-color: transparent;
-    color: var(--on-primary-clr);
+    color: var(--on-secondary-clr);
     border: none;
     cursor: pointer;
     width: 2rem;
@@ -97,7 +97,7 @@ textarea.inpt {
 
 .main-header .goback:hover,
 .main-header .goback:focus {
-    color: var(--secondary-clr);
+    color: var(--primary-clr);
 }
 
 .main-header .page-name {
@@ -125,7 +125,7 @@ textarea.inpt {
 
 .footer-button {
     background-color: transparent;
-    color: var(--secondary-clr);
+    color: var(--primary-clr);
     border: none;
     border-top: 5px solid transparent;
     font-size: 1.2rem;
@@ -142,7 +142,7 @@ textarea.inpt {
 .footer-button:hover,
 .footer-button:active,
 .footer-button:focus {
-    border-top: 5px solid var(--secondary-clr);
+    border-top: 5px solid var(--primary-clr);
 }
 
 .footer-button:hover {
@@ -200,7 +200,7 @@ textarea.inpt {
 
 .word-text {
     font-size: 1.1rem;
-    color: var(--secondary-clr);
+    color: var(--primary-clr);
     flex: 1 1 auto;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -215,8 +215,8 @@ textarea.inpt {
 
 .word-text:hover,
 .word-text:focus {
-    background-color: var(--secondary-clr);
-    color: var(--on-secondary-clr);
+    background-color: var(--primary-clr);
+    color: var(--on-primary-clr);
     outline: none;
 }
 
@@ -243,7 +243,7 @@ textarea.inpt {
 }
 
 .word-edit-block > label {
-    color: var(--secondary-clr);
+    color: var(--primary-clr);
     font-size: 1.2rem;
 }
 
@@ -287,7 +287,7 @@ textarea.inpt {
     font-size: 2rem;
     background-color: transparent;
     border: none;
-    color: var(--secondary-clr);
+    color: var(--primary-clr);
     text-align: center;
     cursor: pointer;
     transition:
@@ -361,7 +361,7 @@ textarea.inpt {
     font-size: 2rem;
     background-color: transparent;
     border: none;
-    color: var(--secondary-clr);
+    color: var(--primary-clr);
     text-align: center;
 }
 
@@ -371,6 +371,6 @@ textarea.inpt {
     align-items: center;
     justify-content: center;
     font-size: 2rem;
-    color: var(--primary-clr);
+    color: var(--secondary-clr);
     text-align: center;
 }
