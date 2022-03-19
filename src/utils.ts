@@ -1,5 +1,6 @@
 import type { Word } from "./interfaces";
 import { GameMode } from "./Providers/GameState";
+import { WordState } from "./Providers/WordStorage";
 
 // Formatting for Local Storage
 // JSON would be enough, but I think it wastes a lot of memory
@@ -56,4 +57,11 @@ export const getGameMode = () : GameMode => {
 }
 export const setGameMode = (gameMode : GameMode) => {
     localStorage.setItem('gamemode', gameMode)
+}
+
+export const filterOutEmptyWords = (wordsState : WordState, setWordsState : (wordsState : WordState) => void) => {
+    setWordsState({
+        ...wordsState,
+        words: wordsState.words.filter(word => word.definition.length > 0 && word.word.length > 0)
+    })
 }

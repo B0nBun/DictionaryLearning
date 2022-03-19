@@ -1,7 +1,7 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { GameMode, GameState, gameStateContext, GameStatus } from "../../../Providers/GameState"
 import { wordStorageContext } from "../../../Providers/WordStorage"
-import { last, shuffle } from "../../../utils"
+import { filterOutEmptyWords, last, shuffle } from "../../../utils"
 
 const getWordJSX = (gameState : GameState, setGameState : (gameState : GameState) => void) => {
     const handleAnswer = () => {
@@ -61,7 +61,12 @@ const getDefinitionJSX = (gameState : GameState, setGameState : (gameState : Gam
 
 export default function PlayingBody() {
     const [gameState, setGameState] = useContext(gameStateContext)
-    const [wordsState] = useContext(wordStorageContext)
+    const [wordsState, setWordsState] = useContext(wordStorageContext)
+    
+    useEffect(() => {
+        filterOutEmptyWords(wordsState, setWordsState)
+    // eslint-disable-next-line
+    }, [])
     
     const handleRestart = () => {
         setGameState({

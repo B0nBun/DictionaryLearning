@@ -9,6 +9,8 @@ import WordStorageProvider from './Providers/WordStorage';
 import PageProvider from './Providers/PageProvider';
 import { getGameMode } from './utils';
 
+// TODO: Properly style errors
+// TODO: Implment some animations with framer-motion
 ReactDOM.render(
   <React.StrictMode>
   <GameStateProvider state={{

@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Page, Word } from "../../../interfaces"
 import { pageContext } from "../../../Providers/PageProvider"
 import { wordStorageContext } from "../../../Providers/WordStorage"
-import { filterBySearch, wordCmp } from "../../../utils"
+import { filterBySearch, filterOutEmptyWords, wordCmp } from "../../../utils"
 
 interface WordProps {
     word : Word,
@@ -11,6 +11,11 @@ interface WordProps {
 const WordBlock = ({word} : WordProps) : JSX.Element => {
     const [, setCurrentPage] = useContext(pageContext)
     const [wordsState, setWordsState] = useContext(wordStorageContext)
+    
+    useEffect(() => {
+        filterOutEmptyWords(wordsState, setWordsState)
+    // eslint-disable-next-line
+    }, [])
     
     const handleWordClick = () => {
         setCurrentPage(Page.WordEdit)

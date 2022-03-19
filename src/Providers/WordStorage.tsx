@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import type { Word } from '../interfaces'
 import { getWordsFromLS, setWordsToLs } from '../utils'
 
-interface WordState {
+export interface WordState {
     words : Word[],
     currentWord : Word | null
 }
@@ -27,7 +27,6 @@ export default function WordStorageProvider({children} : Props) {
     })
 
     const setWordsStateLS = (wordState : WordState) => {
-        wordState.words = wordState.words.filter(word => word.word.length > 0 && word.definition.length > 0)
         setWordsToLs(wordState.words)
         setWordsState(wordState)
     }
