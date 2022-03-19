@@ -33,7 +33,6 @@ export default function GameStateProvider({state, children} : Props) {
         = useState(state)
 
     const setGameStateC = (callback : SetGameStateCallback) => {
-        // console.log('set game state ->', callback(state))
         setGameState(callback(state))
     }
 

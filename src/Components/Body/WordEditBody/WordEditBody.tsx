@@ -13,14 +13,14 @@ export default function WordEditBody() {
         if (!wordsState.currentWord) return
         setWordsState(state => ({
             currentWord: {
-                word : e.currentTarget.value,
+                ...wordsState.currentWord!,
                 definition : wordsState.currentWord!.definition
             },
             words: state.words.map(word => {
                 if (word.word === wordsState.currentWord!.word) {
                     return {
+                        ...word,
                         word: e.currentTarget.value,
-                        definition : word.definition
                     }
                 }
                 return word
@@ -32,14 +32,14 @@ export default function WordEditBody() {
         if (!wordsState.currentWord) return
         setWordsState(state => ({
             currentWord: {
-                word : wordsState.currentWord!.word,
-                definition : e.currentTarget.value
+                ...wordsState.currentWord!,
+                definition : e.currentTarget.value,
             },
             words: state.words.map(word => {
                 if (word.word === wordsState.currentWord!.word) {
                     return {
-                        word: word.word,
-                        definition : e.currentTarget.value
+                        ...word,
+                        definition : e.currentTarget.value,
                     }
                 }
                 return word

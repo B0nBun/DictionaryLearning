@@ -4,7 +4,7 @@ import type { Word } from "./interfaces";
 // JSON would be enough, but I think it wastes a lot of memory
 export const setWordsToLs = (words : Word[]) => {
     const string = words.reduce((acc, word) => {
-        return acc + `<${word.word}|${word.definition}>`
+        return acc + `<${word.included ? '1' : '0'}|${word.word}|${word.definition}>`
     }, '')
     localStorage.setItem('words', string)
 }
@@ -16,10 +16,12 @@ export const getWordsFromLS = () : Word[] => {
         string = '[]'
     }
     let result : Word[] = []
-    string.replaceAll(/<(.+?)\|(.*?)>/g, (sub : string, word : string, definition : string) => {
+    string.replaceAll(/<(\d)\|(.+?)\|(.*?)>/g, (sub : string, inc : string, word : string, definition : string) => {
+        const included = Boolean(Number(inc)) || false
         result.push({
             word,
-            definition
+            definition,
+            included
         })
         return sub
     })

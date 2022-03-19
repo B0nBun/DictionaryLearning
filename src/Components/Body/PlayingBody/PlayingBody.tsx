@@ -31,6 +31,7 @@ const getDefinitionJSX = (gameState : GameState, setGameState : (callback : SetS
     )
 }
 
+// TODO: Guess word by defenition mode
 export default function PlayingBody() {
     const [gameState, setGameState] = useContext(gameStateContext)
     const [wordsState] = useContext(wordStorageContext)
@@ -38,7 +39,7 @@ export default function PlayingBody() {
     const handleRestart = () => {
         setGameState(state => ({
             status : GameStatus.Word,
-            playingWords: shuffle([...wordsState.words])
+            playingWords: shuffle([...wordsState.words.filter(word => word.included)])
         }))
     }
     

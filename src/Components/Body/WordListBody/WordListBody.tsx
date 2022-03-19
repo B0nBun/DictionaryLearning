@@ -26,19 +26,28 @@ const WordBlock = ({word} : WordProps) : JSX.Element => {
             words: state.words.filter(w => w.word !== word.word)
         }))
     }
+
+    const handleWordToggle = () => {
+        setWordsState(state => ({
+            ...state,
+            words: state.words.map(w => w.word === word.word ? {
+                ...word,
+                included: !word.included
+            } : w)
+        }))
+    }
     
     return (
         <div className="row" style={{maxWidth: '100vw'}}>
             <span onClick={handleWordClick} style={{flex: '1 1 auto', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap'}}>
                 {word.word} {word.definition ? '-' : ''} {word.definition}
             </span>
+            <button onClick={handleWordToggle}>{word.included ? 'I' : 'E'}</button>
             <button onClick={handleWordRemove}>X</button>
         </div>
     )
 }
 
-// TODO: Add the search function
-// TODO: Add the feature to either include or exclude words from `playingWords`
 export default function WordListBody() {
     const [wordsState, setWordsState] = useContext(wordStorageContext)
     
@@ -63,7 +72,8 @@ export default function WordListBody() {
             ...state,
             words : [...state.words, {
                 word : newWord.toLowerCase(),
-                definition: newDefinition
+                definition: newDefinition,
+                included: true
             }]
         }))
         setNewWord("")

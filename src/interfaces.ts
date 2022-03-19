@@ -1,6 +1,7 @@
 export interface Word {
     word : string,
-    definition : string
+    definition : string,
+    included : boolean
 }
 
 export enum Page {
