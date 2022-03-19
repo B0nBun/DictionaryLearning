@@ -157,6 +157,14 @@ textarea.inpt {
     padding: 1rem;
 }
 
+.error {
+    color: hsl(0, 70%, 65%);
+}
+
+.word-list-body .error {
+    margin-bottom: 1em;
+}
+
 .search {
     padding-bottom: .2em;
     margin-bottom: 1.5rem;

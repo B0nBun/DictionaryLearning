@@ -67,7 +67,6 @@ export default function WordListBody() {
 
     const handleAdd = (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if (!newWord) return
         if (wordsState.words.some(word => word.word.toUpperCase() === newWord.toUpperCase())) {
             setError(`Word '${newWord}' already exists in the dictionary`)
             return
@@ -100,7 +99,7 @@ export default function WordListBody() {
         <div className="column word-list-body">
             <input onChange={e => setSearch(e.currentTarget.value)} value={search} className="search inpt" type="text" placeholder="Search"/>
             {
-                error ? <div>{error}</div> : ''
+                error ? <div className="error">{error}</div> : ''
             }
             <form onSubmit={handleAdd} className="add-form">
                 <input onChange={e => setNewWord(e.currentTarget.value)} value={newWord} className="new-word inpt" type="text" placeholder="Word" />

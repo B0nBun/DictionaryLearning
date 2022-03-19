@@ -13,7 +13,7 @@ export default function WordEditBody() {
         return () => window.removeEventListener('resize', handleAutoResize)
     }, [])
     
-    if (!wordsState.currentWord) return <div className="column">Error: current word is null</div>
+    if (!wordsState.currentWord) return <div className="error">Error: current word is null</div>
     
     const handleWordChange = (e : React.ChangeEvent<HTMLInputElement>) => {
         if (!wordsState.currentWord) return
@@ -79,7 +79,7 @@ export default function WordEditBody() {
             </div>
             {
             wordsState.currentWord.definition.length === 0 ?
-            <span>Warning: Word will be deleted if it's defenition will be left empty</span> : ""
+            <span className="error">Warning: Word will be deleted if it's defenition will be left empty</span> : ""
             }
         </div>
     ) 
