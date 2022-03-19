@@ -1,33 +1,62 @@
 import { useContext } from "react"
 import { SetStateCallback } from "../../../interfaces"
-import { GameState, gameStateContext, GameStatus } from "../../../Providers/GameState"
+import { GameMode, GameState, gameStateContext, GameStatus } from "../../../Providers/GameState"
 import { wordStorageContext } from "../../../Providers/WordStorage"
 import { last, shuffle } from "../../../utils"
 
 const getWordJSX = (gameState : GameState, setGameState : (callback: SetStateCallback<GameState>) => void) => {
-    return (
-        <button onClick={e => setGameState(state => ({...gameState, status : GameStatus.Definition}))}>
-            {last(gameState.playingWords)!.word}
-        </button>
-    )
-}
-
-const getDefinitionJSX = (gameState : GameState, setGameState : (callback : SetStateCallback<GameState>) => void) => {
     const handleAnswer = () => {
         setGameState(state => ({
+            ...gameState,
             playingWords: [...gameState.playingWords.slice(0, -1)],
-            status: GameStatus.Word
+            status: GameStatus.Definition,
         }))
     }
     
+    if (gameState.gameMode === GameMode.DefByWord) {
+        return (
+            <button onClick={e => setGameState(state => ({...gameState, status : GameStatus.Definition}))}>
+                {last(gameState.playingWords)!.word}
+            </button>
+        )
+    }
+
     return (
         <div className="column">
             <span>
-            {last(gameState.playingWords)!.definition}
+            {last(gameState.playingWords)!.word}
             </span>
             <button onClick={handleAnswer}>Correct</button>
             <button onClick={handleAnswer}>Incorrect</button>
         </div>
+    )
+}
+
+const getDefinitionJSX = (gameState : GameState, setGameState : (callback : SetStateCallback<GameState>) => void) => {    
+    const handleAnswer = () => {
+        setGameState(state => ({
+            ...gameState,
+            playingWords: [...gameState.playingWords.slice(0, -1)],
+            status: GameStatus.Word,
+        }))
+    }
+    
+    if (gameState.gameMode === GameMode.DefByWord) {
+        return (
+            <div className="column">
+                <span>
+                {last(gameState.playingWords)!.definition}
+                </span>
+                <button onClick={handleAnswer}>Correct</button>
+                <button onClick={handleAnswer}>Incorrect</button>
+            </div>
+        )
+    }
+
+    return (
+        <button onClick={e => setGameState(state => ({...gameState, status : GameStatus.Word}))}>
+            {last(gameState.playingWords)!.definition}
+        </button>
     )
 }
 
@@ -38,7 +67,16 @@ export default function PlayingBody() {
     
     const handleRestart = () => {
         setGameState(state => ({
-            status : GameStatus.Word,
+            ...state,
+            status : gameState.gameMode === GameMode.DefByWord ? GameStatus.Word : GameStatus.Definition,
+            playingWords: shuffle([...wordsState.words.filter(word => word.included)])
+        }))
+    }
+
+    const handleModeSwitch = () => {
+        setGameState(state => ({
+            gameMode: gameState.gameMode === GameMode.DefByWord ? GameMode.WordByDef : GameMode.DefByWord,
+            status: gameState.gameMode === GameMode.DefByWord ? GameStatus.Definition : GameStatus.Word,
             playingWords: shuffle([...wordsState.words.filter(word => word.included)])
         }))
     }
@@ -55,6 +93,7 @@ export default function PlayingBody() {
                 }
             </div>
             <button onClick={handleRestart}>Restart</button>
+            <button onClick={handleModeSwitch}>Current Mode: {gameState.gameMode}</button>
         </div>
     )
 }

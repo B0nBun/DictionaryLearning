@@ -64,7 +64,7 @@ export default function WordListBody() {
             setError(`Word '${newWord}' already exists in the dictionary`)
             return
         }
-        if (newWord.match(/[<>\|]/)) {
+        if (newWord.match(/[<>|]/)) {
             setError("`< > |` symbols are reserved, you can't use them in words")
             return
         }

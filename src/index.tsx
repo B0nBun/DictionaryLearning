@@ -7,12 +7,14 @@ import GameStateProvider, { GameStatus } from './Providers/GameState'
 import reportWebVitals from './reportWebVitals';
 import WordStorageProvider from './Providers/WordStorage';
 import PageProvider from './Providers/PageProvider';
+import { getGameMode } from './utils';
 
 ReactDOM.render(
   <React.StrictMode>
   <GameStateProvider state={{
     playingWords : [],
-    status : GameStatus.NotPlaying
+    status : GameStatus.NotPlaying,
+    gameMode: getGameMode()
   }}>
   <WordStorageProvider>
   <PageProvider>

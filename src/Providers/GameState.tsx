@@ -7,9 +7,15 @@ export enum GameStatus {
     Definition = 'Definition',
 }
 
+export enum GameMode {
+    DefByWord = 'Definition By Word',
+    WordByDef = 'Word By Definition'
+}
+
 export interface GameState {
     playingWords : Word[],
-    status : GameStatus
+    status : GameStatus,
+    gameMode : GameMode
 }
 
 type SetGameStateCallback = SetStateCallback<GameState>
@@ -18,7 +24,8 @@ export const gameStateContext :  React.Context<[GameState, (callback : SetGameSt
     = React.createContext([
         {
             playingWords : ([] as Word[]),
-            status : (GameStatus.NotPlaying as GameStatus)
+            status : (GameStatus.NotPlaying as GameStatus),
+            gameMode : (GameMode.DefByWord as GameMode)
         },
         callback => {}
     ])
