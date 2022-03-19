@@ -9,32 +9,32 @@ interface WordProps {
 }
 
 const WordBlock = ({word} : WordProps) : JSX.Element => {
-    const [, setCurrentPage] = useContext(pageContext)
-    const [, setWordsState] = useContext(wordStorageContext)
+    const [currentPage, setCurrentPage] = useContext(pageContext)
+    const [wordsState, setWordsState] = useContext(wordStorageContext)
     
     const handleWordClick = () => {
         setCurrentPage(Page.WordEdit)
-        setWordsState(state => ({
-            ...state,
+        setWordsState({
+            ...wordsState,
             currentWord : word
-        }))
+        })
     }
 
     const handleWordRemove = () => {
-        setWordsState(state => ({
-            ...state,
-            words: state.words.filter(w => w.word !== word.word)
-        }))
+        setWordsState({
+            ...wordsState,
+            words: wordsState.words.filter(w => w.word !== word.word)
+        })
     }
 
     const handleWordToggle = () => {
-        setWordsState(state => ({
-            ...state,
-            words: state.words.map(w => w.word === word.word ? {
+        setWordsState({
+            ...wordsState,
+            words: wordsState.words.map(w => w.word === word.word ? {
                 ...word,
                 included: !word.included
             } : w)
-        }))
+        })
     }
     
     return (
@@ -48,6 +48,7 @@ const WordBlock = ({word} : WordProps) : JSX.Element => {
     )
 }
 
+// TODO: `go back up` button
 export default function WordListBody() {
     const [wordsState, setWordsState] = useContext(wordStorageContext)
     
@@ -68,14 +69,14 @@ export default function WordListBody() {
             setError("`< > |` symbols are reserved, you can't use them in words")
             return
         }
-        setWordsState(state => ({
-            ...state,
-            words : [...state.words, {
+        setWordsState({
+            ...wordsState,
+            words : [...wordsState.words, {
                 word : newWord.toLowerCase(),
                 definition: newDefinition,
                 included: true
             }]
-        }))
+        })
         setNewWord("")
         setNewDefinition("")
     }
@@ -91,7 +92,7 @@ export default function WordListBody() {
                 <input onChange={e => setNewDefinition(e.currentTarget.value)} value={newDefinition} type="text" placeholder="Definition" />
                 <button type="submit">Add</button>
             </form>
-            <button onClick={() => setWordsState(state => ({...state, words: []}))}>Reset All</button>
+            <button onClick={() => setWordsState({...wordsState, words: []})}>Reset All</button>
             {
                 filterBySearch(wordsState.words, search).sort(wordCmp).map((word, idx) => <WordBlock word={word} key={`${word.word}-${idx}`}/>)
             }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import type { SetStateCallback, Word } from '../interfaces'
+import type { Word } from '../interfaces'
 
 export enum GameStatus {
     NotPlaying = 'Not Playing',
@@ -18,16 +18,14 @@ export interface GameState {
     gameMode : GameMode
 }
 
-type SetGameStateCallback = SetStateCallback<GameState>
-
-export const gameStateContext :  React.Context<[GameState, (callback : SetGameStateCallback) => void]> 
+export const gameStateContext :  React.Context<[GameState, (gameState : GameState) => void]> 
     = React.createContext([
         {
             playingWords : ([] as Word[]),
             status : (GameStatus.NotPlaying as GameStatus),
             gameMode : (GameMode.DefByWord as GameMode)
         },
-        callback => {}
+        gameState => {}
     ])
 
 interface Props {
@@ -39,9 +37,5 @@ export default function GameStateProvider({state, children} : Props) {
     const [gameState, setGameState] : [GameState, React.Dispatch<React.SetStateAction<GameState>>]
         = useState(state)
 
-    const setGameStateC = (callback : SetGameStateCallback) => {
-        setGameState(callback(state))
-    }
-
-    return <gameStateContext.Provider value={[gameState, setGameStateC]}>{children}</gameStateContext.Provider>
+    return <gameStateContext.Provider value={[gameState, setGameState]}>{children}</gameStateContext.Provider>
 }

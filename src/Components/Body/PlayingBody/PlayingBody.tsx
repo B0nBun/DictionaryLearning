@@ -1,21 +1,20 @@
 import { useContext } from "react"
-import { SetStateCallback } from "../../../interfaces"
 import { GameMode, GameState, gameStateContext, GameStatus } from "../../../Providers/GameState"
 import { wordStorageContext } from "../../../Providers/WordStorage"
 import { last, shuffle } from "../../../utils"
 
-const getWordJSX = (gameState : GameState, setGameState : (callback: SetStateCallback<GameState>) => void) => {
+const getWordJSX = (gameState : GameState, setGameState : (gameState : GameState) => void) => {
     const handleAnswer = () => {
-        setGameState(state => ({
+        setGameState({
             ...gameState,
             playingWords: [...gameState.playingWords.slice(0, -1)],
             status: GameStatus.Definition,
-        }))
+        })
     }
     
     if (gameState.gameMode === GameMode.DefByWord) {
         return (
-            <button onClick={e => setGameState(state => ({...gameState, status : GameStatus.Definition}))}>
+            <button onClick={e => setGameState({...gameState, status : GameStatus.Definition})}>
                 {last(gameState.playingWords)!.word}
             </button>
         )
@@ -32,13 +31,13 @@ const getWordJSX = (gameState : GameState, setGameState : (callback: SetStateCal
     )
 }
 
-const getDefinitionJSX = (gameState : GameState, setGameState : (callback : SetStateCallback<GameState>) => void) => {    
+const getDefinitionJSX = (gameState : GameState, setGameState : (gameState : GameState) => void) => {    
     const handleAnswer = () => {
-        setGameState(state => ({
+        setGameState({
             ...gameState,
             playingWords: [...gameState.playingWords.slice(0, -1)],
             status: GameStatus.Word,
-        }))
+        })
     }
     
     if (gameState.gameMode === GameMode.DefByWord) {
@@ -54,31 +53,31 @@ const getDefinitionJSX = (gameState : GameState, setGameState : (callback : SetS
     }
 
     return (
-        <button onClick={e => setGameState(state => ({...gameState, status : GameStatus.Word}))}>
+        <button onClick={e => setGameState({...gameState, status : GameStatus.Word})}>
             {last(gameState.playingWords)!.definition}
         </button>
     )
 }
 
-// TODO: Guess word by defenition mode
+// TODO: Filter words with no definition
 export default function PlayingBody() {
     const [gameState, setGameState] = useContext(gameStateContext)
     const [wordsState] = useContext(wordStorageContext)
     
     const handleRestart = () => {
-        setGameState(state => ({
-            ...state,
+        setGameState({
+            ...gameState,
             status : gameState.gameMode === GameMode.DefByWord ? GameStatus.Word : GameStatus.Definition,
             playingWords: shuffle([...wordsState.words.filter(word => word.included)])
-        }))
+        })
     }
 
     const handleModeSwitch = () => {
-        setGameState(state => ({
+        setGameState({
             gameMode: gameState.gameMode === GameMode.DefByWord ? GameMode.WordByDef : GameMode.DefByWord,
             status: gameState.gameMode === GameMode.DefByWord ? GameStatus.Definition : GameStatus.Word,
             playingWords: shuffle([...wordsState.words.filter(word => word.included)])
-        }))
+        })
     }
     
     return (

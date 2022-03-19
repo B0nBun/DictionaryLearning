@@ -11,12 +11,12 @@ export default function WordEditBody() {
     
     const handleWordChange = (e : React.ChangeEvent<HTMLInputElement>) => {
         if (!wordsState.currentWord) return
-        setWordsState(state => ({
+        setWordsState({
             currentWord: {
                 ...wordsState.currentWord!,
                 definition : wordsState.currentWord!.definition
             },
-            words: state.words.map(word => {
+            words: wordsState.words.map(word => {
                 if (word.word === wordsState.currentWord!.word) {
                     return {
                         ...word,
@@ -25,17 +25,17 @@ export default function WordEditBody() {
                 }
                 return word
             })
-        }))
+        })
     }
 
     const handleDefinitionChange = (e : React.ChangeEvent<HTMLInputElement>) => {
         if (!wordsState.currentWord) return
-        setWordsState(state => ({
+        setWordsState({
             currentWord: {
                 ...wordsState.currentWord!,
                 definition : e.currentTarget.value,
             },
-            words: state.words.map(word => {
+            words: wordsState.words.map(word => {
                 if (word.word === wordsState.currentWord!.word) {
                     return {
                         ...word,
@@ -44,7 +44,7 @@ export default function WordEditBody() {
                 }
                 return word
             })
-        }))
+        })
     }    
     
     return (
