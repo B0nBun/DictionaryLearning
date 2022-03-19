@@ -34,11 +34,15 @@ const getWordJSX = (gameState : GameState, setGameState : (gameState : GameState
 }
 
 const getDefinitionJSX = (gameState : GameState, setGameState : (gameState : GameState) => void) => {    
-    const handleAnswer = () => {
+    const handleAnswer = (correct : boolean) => () => {
         setGameState({
             ...gameState,
             playingWords: [...gameState.playingWords.slice(0, -1)],
             status: GameStatus.Word,
+            score: {
+                correct: gameState.score.correct + (correct ? 1 : 0),
+                total: gameState.score.total + 1
+            }
         })
     }
     
@@ -49,8 +53,8 @@ const getDefinitionJSX = (gameState : GameState, setGameState : (gameState : Gam
                 {last(gameState.playingWords)!.definition}
                 </span>
                 <div className="answers">
-                    <button className="btn correct" onClick={handleAnswer}>Correct</button>
-                    <button className="btn incorrect" onClick={handleAnswer}>Incorrect</button>
+                    <button className="btn correct" onClick={handleAnswer(true)}>Correct</button>
+                    <button className="btn incorrect" onClick={handleAnswer(false)}>Incorrect</button>
                 </div>
             </div>
         )
@@ -77,12 +81,17 @@ export default function PlayingBody() {
         setGameState({
             ...gameState,
             status : gameState.gameMode === GameMode.DefByWord ? GameStatus.Word : GameStatus.Definition,
-            playingWords: shuffle([...wordsState.words.filter(word => word.included)])
+            playingWords: shuffle([...wordsState.words.filter(word => word.included)]),
+            score: {
+                total: 0,
+                correct: 0,
+            }
         })
     }
 
     const handleModeSwitch = () => {
         setGameState({
+            ...gameState,
             gameMode: gameState.gameMode === GameMode.DefByWord ? GameMode.WordByDef : GameMode.DefByWord,
             status: gameState.gameMode === GameMode.DefByWord ? GameStatus.Definition : GameStatus.Word,
             playingWords: shuffle([...wordsState.words.filter(word => word.included)])
@@ -91,6 +100,7 @@ export default function PlayingBody() {
     
     return (
         <div className="play-body">
+            {gameState.score.total === 0 ? '' : <span className="score">{gameState.score.correct} / {gameState.score.total}</span>}
             {
                 gameState.status === GameStatus.NotPlaying ? <span className="warning">Restart to begin!</span> :
                 gameState.playingWords.length === 0 ? <span className="warning">No words left!</span> :

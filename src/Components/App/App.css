@@ -285,6 +285,15 @@ textarea.inpt {
     padding: 1rem;
 }
 
+.play-body .score {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--primary-clr);
+    font-weight: bolder;
+}
+
 .restart-mode-container {
     display: flex;
     flex-direction: column;

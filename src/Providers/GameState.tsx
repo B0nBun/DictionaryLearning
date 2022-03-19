@@ -15,7 +15,11 @@ export enum GameMode {
 export interface GameState {
     playingWords : Word[],
     status : GameStatus,
-    gameMode : GameMode
+    gameMode : GameMode,
+    score: {
+        correct: number,
+        total: number
+    }
 }
 
 export const gameStateContext :  React.Context<[GameState, (gameState : GameState) => void]> 
@@ -23,7 +27,11 @@ export const gameStateContext :  React.Context<[GameState, (gameState : GameStat
         {
             playingWords : ([] as Word[]),
             status : (GameStatus.NotPlaying as GameStatus),
-            gameMode : (GameMode.DefByWord as GameMode)
+            gameMode : (GameMode.DefByWord as GameMode),
+            score: {
+                correct: 0,
+                total: 0,
+            }
         },
         gameState => {}
     ])

@@ -16,7 +16,11 @@ ReactDOM.render(
   <GameStateProvider state={{
     playingWords : [],
     status : GameStatus.NotPlaying,
-    gameMode: getGameMode()
+    gameMode: getGameMode(),
+    score : {
+      correct: 0,
+      total: 0
+    }
   }}>
   <WordStorageProvider>
   <PageProvider>
