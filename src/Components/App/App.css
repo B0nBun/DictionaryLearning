@@ -1,8 +1,54 @@
+:root {
+    --background-clr: #1B1D36;
+    --on-background-color: #E1E7EC;
+    --primary-clr: #FCA6D1;
+    --on-primary-clr: #333;
+    --secondary-clr: #99D6EA;
+    --on-secondary-clr: #333;
+}
+
 .App {
     min-height: 100vh;
     max-height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: var(--background-clr);
+}
+
+.inpt {
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px var(--secondary-clr) solid;
+    color: var(--secondary-clr);
+}
+
+.inpt:hover,
+.inpt:focus {
+    border-color: var(--on-background-color);
+    color: var(--on-background-color);
+    outline: none;
+}
+
+.btn {
+    background-color: var(--background-clr);
+    color: var(--secondary-clr);
+    font-weight: bolder;
+    padding: .3em .5em;
+    border: 2px solid var(--secondary-clr);
+    border-radius: .4em;
+    cursor: pointer;
+    transition:
+        background-color .2s ease,
+        color .2s ease;
+}
+
+.btn:hover,
+.btn:focus,
+.btn:active,
+.btn.active {
+    background-color: var(--secondary-clr);
+    color: var(--on-secondary-clr);
+    outline: none;
 }
 
 .main-header {
@@ -10,8 +56,82 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-color: #2f2f2f;
-    color: #f0f6f0;
+    background-color: var(--primary-clr);
+    color: var(--on-primary-clr);
+}
+
+/* Word List Page */
+
+.word-list-body {
+    padding: 1rem;
+}
+
+.search {
+    padding-bottom: .2em;
+    margin-bottom: 1.5rem;
+    font-size: .8rem;
+    transition: font-size .2s ease;
+}
+
+.search:focus {
+    font-size: 1.3rem;
+    outline: none;
+}
+
+.add-form {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin-bottom: 1rem;
+}
+
+.add-form > input {
+    font-size: 1.2rem;
+}
+
+.add.btn {
+    font-size: 1.5rem;
+    padding: 0;
+}
+
+.words {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.words-item {
+    display: flex;
+    flex-direction: row;
+    gap: 1ch;
+    max-width: 90vw;
+}
+
+.word-text {
+    font-size: 1.1rem;
+    color: var(--secondary-clr);
+    flex: 1 1 auto;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;   
+    cursor: pointer;
+    border-bottom: transparent 2px solid;
+    transition:
+        color .2s ease;
+}
+
+.word-text:hover,
+.word-text:focus {
+    color: var(--on-background-color);
+    border-color: var(--on-background-color);
+    outline: none;
+}
+
+.words-item > .btn {
+    min-width: 2em;
+    max-width: 2em;
+    min-height: 2em;
+    max-height: 2em;
 }
 
 .main-header button.goback {

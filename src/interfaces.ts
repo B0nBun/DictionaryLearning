@@ -9,5 +9,3 @@ export enum Page {
     Playing  = 'Playing',
     WordEdit = 'Word Edit'
 }
-
-export type SetStateCallback<State> = (state : State) => State

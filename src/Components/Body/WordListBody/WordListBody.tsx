@@ -38,17 +38,18 @@ const WordBlock = ({word} : WordProps) : JSX.Element => {
     }
     
     return (
-        <div className="row" style={{maxWidth: '100vw'}}>
-            <span onClick={handleWordClick} style={{flex: '1 1 auto', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap'}}>
+        <div className="words-item">
+            <span tabIndex={0} onClick={handleWordClick} className="word-text" style={{}}>
                 {word.word} {word.definition ? '-' : ''} {word.definition}
             </span>
-            <button onClick={handleWordToggle}>{word.included ? 'I' : 'E'}</button>
-            <button onClick={handleWordRemove}>X</button>
+            <button className={`btn ${word.included ? '' : 'active'}`} onClick={handleWordToggle}>{word.included ? 'I' : 'E'}</button>
+            <button className="btn" onClick={handleWordRemove}>X</button>
         </div>
     )
 }
 
 // TODO: `go back up` button
+// TODO: Think about where to put reset button (maybe in some submenu)
 export default function WordListBody() {
     const [wordsState, setWordsState] = useContext(wordStorageContext)
     
@@ -90,20 +91,24 @@ export default function WordListBody() {
     }
     
     return (
-        <div className="column">
-            <input onChange={e => setSearch(e.currentTarget.value)} value={search} type="text" placeholder="Search" style={{marginBottom: '1rem'}}/>
+        <div className="column word-list-body">
+            <input onChange={e => setSearch(e.currentTarget.value)} value={search} className="search inpt" type="text" placeholder="Search"/>
             {
                 error ? <div>{error}</div> : ''
             }
-            <form onSubmit={handleAdd} className="column">
-                <input onChange={e => setNewWord(e.currentTarget.value)} value={newWord} type="text" placeholder="Word" />
-                <input onChange={e => setNewDefinition(e.currentTarget.value)} value={newDefinition} type="text" placeholder="Definition" />
-                <button type="submit">Add</button>
+            <form onSubmit={handleAdd} className="add-form">
+                <input onChange={e => setNewWord(e.currentTarget.value)} value={newWord} className="new-word inpt" type="text" placeholder="Word" />
+                <input onChange={e => setNewDefinition(e.currentTarget.value)} value={newDefinition} className="new-definition inpt" type="text" placeholder="Definition" />
+                <button className="btn add" type="submit">+</button>
             </form>
-            <button onClick={() => setWordsState({...wordsState, words: []})}>Reset All</button>
-            {
-                filterBySearch(wordsState.words, search).sort(wordCmp).map((word, idx) => <WordBlock word={word} key={`${word.word}-${idx}`}/>)
-            }
+            <div className="words">
+                {
+                    filterBySearch(wordsState.words, search).sort(wordCmp).map(
+                        (word, idx) => <WordBlock word={word} key={`${word.word}-${idx}`}/>
+                    )
+                }
+            </div>
+            {/* <button className="btn reset" onClick={() => setWordsState({...wordsState, words: []})}>Reset All</button> */}
         </div>
     )
 }
