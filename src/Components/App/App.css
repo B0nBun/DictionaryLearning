@@ -63,7 +63,7 @@ textarea.inpt {
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     padding-top: 1rem;
 }
 
@@ -116,6 +116,8 @@ textarea.inpt {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: sticky;
+    bottom: 0;
 }
 
 .main-footer > * {
@@ -124,13 +126,15 @@ textarea.inpt {
 }
 
 .footer-button {
-    background-color: transparent;
+    background-color: var(--background-clr);
     color: var(--primary-clr);
     border: none;
     border-top: 5px solid transparent;
     font-size: 1.2rem;
     font-weight: bold;
     padding-top: .2em;
+    padding-left: 0;
+    padding-right: 0;
     cursor: pointer;
 
     transition:
@@ -154,6 +158,10 @@ textarea.inpt {
 
 .word-list-body {
     padding: 1rem;
+
+    width: clamp(0px, 100%, 700px);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .error {
