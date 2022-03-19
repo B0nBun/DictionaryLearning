@@ -12,7 +12,7 @@ interface Props {
 }
     
 export default function PageProvider({children} : Props) {
-    const [currentPage, setCurrentPage] = useState(Page.WordList)
+    const [currentPage, setCurrentPage] = useState(Page.Playing)
     
     return (
         <pageContext.Provider value={[currentPage, setCurrentPage]}>{children}</pageContext.Provider>

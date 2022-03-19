@@ -60,6 +60,8 @@ textarea.inpt {
 /* Body */
 
 .main-body {
+    display: flex;
+    flex-direction: column;
     flex: 1 1 auto;
     overflow-y: scroll;
     padding-top: 1rem;
@@ -255,4 +257,120 @@ textarea.inpt {
 
 .word-edit-block > .name-edit:focus {
     font-size: 1.4rem;
+}
+
+/* Playing Body */
+
+.play-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    padding: 1rem;
+}
+
+.restart-mode-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    gap: .5rem;
+}
+
+.restart-mode-container > .btn {
+    font-size: 1.2rem;
+    border: none;
+}
+
+.guess-block {
+    width: 100%;
+    height: 100%;
+    flex: 1 1 auto;
+    font-size: 2rem;
+    background-color: transparent;
+    border: none;
+    color: var(--secondary-clr);
+    text-align: center;
+    cursor: pointer;
+    transition:
+        transform .1s ease,
+        color .1s ease;
+}
+
+.guess-block:active {
+    transform: scale(.9);
+    color: white;
+}
+
+.answer-block {
+    --correct-clr: hsl(160, 70%, 65%);
+    --incorrect-clr: hsl(0, 70%, 65%);
+
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    flex: 1 1 auto;
+}
+
+.answer-block .answers {
+    margin-top: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.answer-block .answers > .btn {
+    flex: 1;
+    font-size: 1.3rem;
+    height: clamp(125px, 20vw, 200px);
+    transition:
+        transform .1s ease,
+        background-color .1s ease,
+        color .1s ease;
+}
+
+.answers > .btn.correct {
+    --corresponding-clr: var(--correct-clr);
+}
+.answers > .btn.incorrect {
+    --corresponding-clr: var(--incorrect-clr);
+}
+
+.answers > .btn {
+    color: var(--corresponding-clr);
+    border: 5px solid var(--corresponding-clr);
+}
+
+.answers > .btn:hover,
+.answers > .btn:focus,
+.answers > .btn:active {
+    background-color: var(--corresponding-clr);
+    color: var(--background-clr);
+}
+
+.answers > .btn:active {
+    transform: scale(.9);
+}
+
+.answer-block .guess-result {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex: 1 1 auto;
+    font-size: 2rem;
+    background-color: transparent;
+    border: none;
+    color: var(--secondary-clr);
+    text-align: center;
+}
+
+.play-body .warning {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--primary-clr);
+    text-align: center;
 }

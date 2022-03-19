@@ -14,19 +14,21 @@ const getWordJSX = (gameState : GameState, setGameState : (gameState : GameState
     
     if (gameState.gameMode === GameMode.DefByWord) {
         return (
-            <button onClick={e => setGameState({...gameState, status : GameStatus.Definition})}>
+            <button className="guess-block" onClick={e => setGameState({...gameState, status : GameStatus.Definition})}>
                 {last(gameState.playingWords)!.word}
             </button>
         )
     }
 
     return (
-        <div className="column">
-            <span>
+        <div className="answer-block">
+            <span className="guess-result">
             {last(gameState.playingWords)!.word}
             </span>
-            <button onClick={handleAnswer}>Correct</button>
-            <button onClick={handleAnswer}>Incorrect</button>
+            <div className="answers">
+                <button className="btn correct" onClick={handleAnswer}>Correct</button>
+                <button className="btn incorrect" onClick={handleAnswer}>Incorrect</button>
+            </div>
         </div>
     )
 }
@@ -42,18 +44,20 @@ const getDefinitionJSX = (gameState : GameState, setGameState : (gameState : Gam
     
     if (gameState.gameMode === GameMode.DefByWord) {
         return (
-            <div className="column">
-                <span>
+            <div className="answer-block">
+                <span className="guess-result">
                 {last(gameState.playingWords)!.definition}
                 </span>
-                <button onClick={handleAnswer}>Correct</button>
-                <button onClick={handleAnswer}>Incorrect</button>
+                <div className="answers">
+                    <button className="btn correct" onClick={handleAnswer}>Correct</button>
+                    <button className="btn incorrect" onClick={handleAnswer}>Incorrect</button>
+                </div>
             </div>
         )
     }
 
     return (
-        <button onClick={e => setGameState({...gameState, status : GameStatus.Word})}>
+        <button className="guess-block" onClick={e => setGameState({...gameState, status : GameStatus.Word})}>
             {last(gameState.playingWords)!.definition}
         </button>
     )
@@ -65,6 +69,7 @@ export default function PlayingBody() {
     
     useEffect(() => {
         filterOutEmptyWords(wordsState, setWordsState)
+        handleRestart()
     // eslint-disable-next-line
     }, [])
     
@@ -85,18 +90,18 @@ export default function PlayingBody() {
     }
     
     return (
-        <div className="column">
-            <div className="row">
-                {
-                    gameState.status === GameStatus.NotPlaying ? 'Restart to begin!' :
-                    gameState.playingWords.length === 0 ? 'No words left!' :
-                    gameState.status === GameStatus.Word ? getWordJSX(gameState, setGameState) :
-                    gameState.status === GameStatus.Definition ? getDefinitionJSX(gameState, setGameState) :
-                    `Can't display game in status ${gameState.status}`
-                }
+        <div className="play-body">
+            {
+                gameState.status === GameStatus.NotPlaying ? <span className="warning">Restart to begin!</span> :
+                gameState.playingWords.length === 0 ? <span className="warning">No words left!</span> :
+                gameState.status === GameStatus.Word ? getWordJSX(gameState, setGameState) :
+                gameState.status === GameStatus.Definition ? getDefinitionJSX(gameState, setGameState) :
+                `Can't display game in status ${gameState.status}`
+            }
+            <div className="restart-mode-container">
+                <button className="mode-switch btn" onClick={handleModeSwitch}>Current Mode: {gameState.gameMode}</button>
+                <button className="restart btn" onClick={handleRestart}>Restart</button>
             </div>
-            <button onClick={handleRestart}>Restart</button>
-            <button onClick={handleModeSwitch}>Current Mode: {gameState.gameMode}</button>
         </div>
     )
 }

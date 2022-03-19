@@ -55,6 +55,7 @@ const WordBlock = ({word} : WordProps) : JSX.Element => {
 
 // TODO: `go back up` button
 // TODO: Think about where to put reset button (maybe in some submenu)
+// TODO: Make included and excluded with proper icons from html entities
 export default function WordListBody() {
     const [wordsState, setWordsState] = useContext(wordStorageContext)
     
