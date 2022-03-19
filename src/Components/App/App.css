@@ -4,7 +4,7 @@
     --primary-clr: #FCA6D1;
     --on-primary-clr: #333;
     --secondary-clr: #99D6EA;
-    --on-secondary-clr: #333;
+    --on-secondary-clr: #111;
 }
 
 .App {
@@ -193,6 +193,7 @@ textarea.inpt {
     flex-direction: row;
     gap: 1ch;
     max-width: 90vw;
+    align-items: center;
 }
 
 .word-text {
@@ -203,15 +204,17 @@ textarea.inpt {
     overflow: hidden;
     white-space: nowrap;   
     cursor: pointer;
-    border-bottom: transparent 2px solid;
+    padding: .5ch 1ch;
+    border-radius: .3em;
     transition:
+        background-color .2s ease,
         color .2s ease;
 }
 
 .word-text:hover,
 .word-text:focus {
-    color: var(--on-background-color);
-    border-color: var(--on-background-color);
+    background-color: var(--secondary-clr);
+    color: var(--on-secondary-clr);
     outline: none;
 }
 
