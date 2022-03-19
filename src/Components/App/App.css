@@ -45,7 +45,8 @@ textarea.inpt {
     cursor: pointer;
     transition:
         background-color .2s ease,
-        color .2s ease;
+        color .2s ease,
+        border .2s ease;
 }
 
 .btn:hover,
@@ -225,6 +226,22 @@ textarea.inpt {
     max-width: 2em;
     min-height: 2em;
     max-height: 2em;
+}
+
+.words-item > .btn:hover,
+.words-item > .btn:focus,
+.words-item > .btn:active {
+    background-color: var(--secondary-clr);
+    color: var(--on-secondary-clr);
+    border-color: transparent;
+}
+
+.words-item > .btn.active:hover,
+.words-item > .btn.active:focus,
+.words-item > .btn.active:active {
+    background-color: var(--secondary-clr);
+    color: var(--on-secondary-clr);
+    border-color: transparent;
 }
 
 /* Word Edit */

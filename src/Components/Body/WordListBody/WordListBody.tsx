@@ -47,7 +47,7 @@ const WordBlock = ({word} : WordProps) : JSX.Element => {
             <span tabIndex={0} onClick={handleWordClick} className="word-text" style={{}}>
                 {word.word} {word.definition ? '-' : ''} {word.definition}
             </span>
-            <button className={`btn ${word.included ? '' : 'active'}`} onClick={handleWordToggle}>{word.included ? 'I' : 'E'}</button>
+            <button className={`btn ${word.included ? 'active' : ''}`} onClick={handleWordToggle}>{word.included ? `\u2713` : ``}</button>
             <button className="btn" onClick={handleWordRemove}>X</button>
         </div>
     )
