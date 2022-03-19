@@ -22,6 +22,12 @@
     color: var(--secondary-clr);
 }
 
+textarea.inpt {
+    resize: none;
+    word-wrap: break-word;
+    overflow-y: hidden;
+}
+
 .inpt:hover,
 .inpt:focus {
     border-color: var(--on-background-color);
@@ -214,4 +220,36 @@
     max-width: 2em;
     min-height: 2em;
     max-height: 2em;
+}
+
+/* Word Edit */
+
+.word-edit-body {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.word-edit-block {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.word-edit-block > label {
+    color: var(--secondary-clr);
+    font-size: 1.2rem;
+}
+
+.word-edit-block > .definition-edit {
+    font-size: 1.2rem;
+}
+
+.word-edit-block > .name-edit {
+    transition: font-size .2s ease;
+}
+
+.word-edit-block > .name-edit:focus {
+    font-size: 1.4rem;
 }

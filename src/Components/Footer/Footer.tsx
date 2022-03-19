@@ -11,18 +11,20 @@ export default function Footer() {
     
     return (
         <footer className="main-footer">
-            {
-            [Page.Playing, Page.WordList].map(
-                page => (
-                    <button
-                        key={`footer-button-${page}`}
-                        onClick={handleClick(page)}
-                        className={`footer-button ${page === currentPage ? 'active' : ''}`}
-                    >
-                        {page}
-                    </button>
-                ))
-            }
+            <button
+                key={`footer-button-${Page.Playing}`}
+                onClick={handleClick(Page.Playing)}
+                className={`footer-button ${Page.Playing === currentPage ? 'active' : ''}`}
+            >
+                {Page.Playing}
+            </button>
+            <button
+                key={`footer-button-${Page.WordList}`}
+                onClick={handleClick(Page.WordList)}
+                className={`footer-button ${[Page.WordList, Page.WordEdit].some(p => p === currentPage) ? 'active' : ''}`}
+            >
+                {Page.WordList}
+            </button>
         </footer>
     )
 }
