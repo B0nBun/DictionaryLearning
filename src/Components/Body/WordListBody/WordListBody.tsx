@@ -54,8 +54,6 @@ const WordBlock = ({word} : WordProps) : JSX.Element => {
     )
 }
 
-// TODO: Think about where to put reset button (maybe in some submenu)
-// TODO: Add the ability to exclude (or even delete) multiple words by dragging mouse/pointer
 export default function WordListBody() {
     const [wordsState, setWordsState] = useContext(wordStorageContext)
     

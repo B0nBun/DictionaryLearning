@@ -3,7 +3,6 @@ import { Page } from "../../../interfaces"
 import { pageContext } from "../../../Providers/PageProvider"
 import { wordStorageContext } from "../../../Providers/WordStorage"
 
-// TODO: `go back` button on android won't work so search for some event handler, idk
 export default function WordEditBody() {
     const [wordsState, setWordsState] = useContext(wordStorageContext)
     const [, setCurrentPage] = useContext(pageContext)

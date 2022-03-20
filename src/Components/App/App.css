@@ -1,10 +1,11 @@
 :root {
-    --background-clr: #1B1D36;
-    --on-background-color: #E1E7EC;
-    --secondary-clr: #FCA6D1;
-    --on-primary-clr: #111;
-    --primary-clr: #99D6EA;
-    --on-secondary-clr: #111;
+    --background-clr: hsl(235, 30%, 15%);
+    --secondary-clr: hsl(330, 70%, 85%);
+    --primary-clr: hsl(195, 45%, 70%);
+
+    --on-background-color: hsl(200, 20%, 90%);
+    --on-primary-clr: hsl(0, 0%, 5%);
+    --on-secondary-clr: hsl(0, 0%, 5%);
 
     scroll-behavior: smooth;
 }
@@ -65,7 +66,6 @@ textarea.inpt {
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
-    /* overflow-y: scroll; */
     padding-top: 1rem;
 }
 
@@ -199,6 +199,15 @@ textarea.inpt {
 .add.btn {
     font-size: 1.5rem;
     padding: 0;
+    border-color: var(--secondary-clr);
+    color: var(--secondary-clr)
+}
+
+.add.btn:hover,
+.add.btn:active,
+.add.btn:focus {
+    background-color: var(--secondary-clr);
+    color: var(--background-clr)
 }
 
 .words {
