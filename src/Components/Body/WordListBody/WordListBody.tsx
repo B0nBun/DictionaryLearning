@@ -18,6 +18,7 @@ const WordBlock = ({word} : WordProps) : JSX.Element => {
     }, [])
     
     const handleWordClick = () => {
+        window.history.pushState(Page.WordEdit, document.title, document.location.pathname)
         setCurrentPage(Page.WordEdit)
         setWordsState({
             ...wordsState,
@@ -65,7 +66,7 @@ export default function WordListBody() {
     const [error, setError] = useState("")
     const [canGoUp, setCanGoUp] = useState(false)
 
-    const handleGoBackButton = () => {
+    const handleGoUpButton = () => {
         window.scrollTo(0, 0)
     }
 
@@ -115,7 +116,7 @@ export default function WordListBody() {
     
     return (
         <div className="column word-list-body">
-            {canGoUp ? <div onClick={handleGoBackButton} className="goup-btn">^</div> : ''}
+            {canGoUp ? <div onClick={handleGoUpButton} className="goup-btn">^</div> : ''}
             <input onChange={e => setSearch(e.currentTarget.value)} value={search} className="search inpt" type="text" placeholder="Search"/>
             {
                 error ? <div className="error">{error}</div> : ''

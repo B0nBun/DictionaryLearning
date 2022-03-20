@@ -1,16 +1,28 @@
 import React, { useContext, useEffect, useRef } from "react"
+import { Page } from "../../../interfaces"
+import { pageContext } from "../../../Providers/PageProvider"
 import { wordStorageContext } from "../../../Providers/WordStorage"
 
 // TODO: `go back` button on android won't work so search for some event handler, idk
 export default function WordEditBody() {
     const [wordsState, setWordsState] = useContext(wordStorageContext)
+    const [, setCurrentPage] = useContext(pageContext)
     const textareaRef : React.LegacyRef<HTMLTextAreaElement> = useRef(null)
 
+    const handleBackButton = () => {
+        setCurrentPage(Page.WordList)
+    }
+    
     useEffect(() => {
         handleAutoResize()
         window.addEventListener('resize', handleAutoResize)
+        window.addEventListener('popstate', handleBackButton)
 
-        return () => window.removeEventListener('resize', handleAutoResize)
+        return () => {
+            window.removeEventListener('resize', handleAutoResize)
+            window.removeEventListener('popstate', handleBackButton)
+        }
+    // eslint-disable-next-line
     }, [])
     
     if (!wordsState.currentWord) return <div className="error">Error: current word is null</div>
