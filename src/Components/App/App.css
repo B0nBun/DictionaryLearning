@@ -269,30 +269,6 @@ textarea.inpt {
     border-color: transparent;
 }
 
-.goup-btn {
-    position: fixed;
-    right: 2rem;
-    top: 2rem;
-    width: 3rem;
-    height: 3rem;
-    border-radius: .5rem;
-    background-color: hsl(0, 70%, 65%);
-    color: #fff;
-    opacity: .5;
-    z-index: 100;
-    font-size: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: opacity .2s ease;
-}
-
-.goup-btn:hover,
-.goup-btn:focus {
-    opacity: .8
-}
-
 /* Word Edit */
 
 .word-edit-body {

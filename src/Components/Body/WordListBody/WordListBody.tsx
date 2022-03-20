@@ -62,25 +62,6 @@ export default function WordListBody() {
     const [search, setSearch] = useState("")
     
     const [error, setError] = useState("")
-    const [canGoUp, setCanGoUp] = useState(false)
-
-    const handleGoUpButton = () => {
-        window.scrollTo(0, 0)
-    }
-
-    const handleScroll = (e : Event) => {
-        if (window.scrollY > 100) {
-            setCanGoUp(true)
-            return
-        }
-        setCanGoUp(false)
-    }
-    
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll)
-
-        return () => window.removeEventListener('scroll', handleScroll)
-    })
 
     const handleAdd = (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -114,7 +95,6 @@ export default function WordListBody() {
     
     return (
         <div className="column word-list-body">
-            {canGoUp ? <div onClick={handleGoUpButton} className="goup-btn">^</div> : ''}
             <input onChange={e => setSearch(e.currentTarget.value)} value={search} className="search inpt" type="text" placeholder="Search"/>
             {
                 error ? <div className="error">{error}</div> : ''
