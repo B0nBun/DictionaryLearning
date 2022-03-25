@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react"
 import { GameMode, GameState, gameStateContext, GameStatus } from "../../../Providers/GameState"
 import { wordStorageContext } from "../../../Providers/WordStorage"
 import { filterOutEmptyWords, last, shuffle } from "../../../utils"
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, Variants } from 'framer-motion'
 
 const getWordJSX = (gameState : GameState, setGameState : (gameState : GameState) => void) => {
     const handleAnswer = () => {
@@ -99,21 +99,28 @@ export default function PlayingBody() {
         })
     }
     
+    const pageVariants : Variants = {
+        initial: {
+            x: '-100%',
+            opacity: 0,
+        },
+        appear: {
+            x: '0%',
+            opacity: 1,
+        },
+        exit: {
+            x: '-100%',
+            opacity: 0,
+        }
+    }
+    
     return (
         <motion.div
             className="play-body"
-            initial={{
-                x: '-100%',
-                opacity: 0,
-            }}
-            animate={{
-                x: '0%',
-                opacity: 1
-            }}
-            exit={{
-                x: '-100%',
-                opacity: 0
-            }}
+            variants={pageVariants}
+            initial="initial"
+            animate="appear"
+            exit="exit"
             transition={{ease: 'easeInOut'}}
         >
             {gameState.score.total === 0 ? '' : <span className="score">{gameState.score.correct} / {gameState.score.total}</span>}

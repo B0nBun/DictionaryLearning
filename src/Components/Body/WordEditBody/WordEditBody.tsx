@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef } from "react"
 import { Page } from "../../../interfaces"
 import { pageContext } from "../../../Providers/PageProvider"
 import { wordStorageContext } from "../../../Providers/WordStorage"
-import { motion } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
 
 export default function WordEditBody() {
     const [wordsState, setWordsState] = useContext(wordStorageContext)
@@ -70,21 +70,29 @@ export default function WordEditBody() {
             })
         })
     }    
+
+    const pageVariants : Variants = {
+        initial: {
+            x: '-100%',
+            opacity: 0,
+        },
+        appear: {
+            x: '0%',
+            opacity: 1,
+        },
+        exit: {
+            x: '-100%',
+            opacity: 0,
+        }
+    }
+    
     return (
         <motion.div
             className="word-edit-body"
-            initial={{
-                x: '-100%',
-                opacity: 0,
-            }}
-            animate={{
-                x: '0%',
-                opacity: 1
-            }}
-            exit={{
-                x: '-100%',
-                opacity: 0,
-            }}
+            variants={pageVariants}
+            initial="initial"
+            animate="appear"
+            exit="exit"
             transition={{ease: 'easeInOut'}}
         >
             <div className="word-edit-block">

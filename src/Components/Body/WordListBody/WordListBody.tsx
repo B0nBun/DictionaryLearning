@@ -3,7 +3,7 @@ import { Page, Word } from "../../../interfaces"
 import { pageContext } from "../../../Providers/PageProvider"
 import { wordStorageContext } from "../../../Providers/WordStorage"
 import { filterBySearch, filterOutEmptyWords, wordCmp } from "../../../utils"
-import { motion } from 'framer-motion' 
+import { AnimatePresence, motion, Variants } from 'framer-motion' 
 
 interface WordProps {
     word : Word,
@@ -43,15 +43,33 @@ const WordBlock = ({word} : WordProps) : JSX.Element => {
             } : w)
         })
     }
+
+    const wordListVariants : Variants = {
+        initial: {
+            x: '0%',
+            opacity: 0
+        },
+        animate: {
+            x: '0%',
+            opacity: 1,
+        },
+    }
     
     return (
-        <div className="words-item">
-            <span tabIndex={0} onClick={handleWordClick} className="word-text" style={{}}>
+        <motion.div
+            variants={wordListVariants}
+            initial="initial"
+            animate="animate"
+            className="words-item"
+            transition={{ease: 'easeInOut'}}
+            layout
+        >
+            <motion.span tabIndex={0} onClick={handleWordClick} className="word-text" style={{}}>
                 {word.word} {word.definition ? '-' : ''} {word.definition}
-            </span>
-            <button className={`btn ${word.included ? 'active' : ''}`} onClick={handleWordToggle}>{word.included ? `\u2713` : ``}</button>
-            <button className="btn" onClick={handleWordRemove}>X</button>
-        </div>
+            </motion.span>
+            <motion.button className={`btn ${word.included ? 'active' : ''}`} onClick={handleWordToggle}>{word.included ? `\u2713` : ``}</motion.button>
+            <motion.button className="btn" onClick={handleWordRemove}>X</motion.button>
+        </motion.div>
     )
 }
 
@@ -94,21 +112,28 @@ export default function WordListBody() {
         setNewDefinition("")
     }
     
+    const pageVariants : Variants = {
+        initial: {
+            x: '100%',
+            opacity: 0,
+        },
+        appear: {
+            x: '0%',
+            opacity: 1,
+        },
+        exit: {
+            x: '100%',
+            opacity: 0,
+        }
+    }
+    
     return (
         <motion.div
             className="column word-list-body"
-            initial={{
-                x: '100%',
-                opacity: 0,
-            }}
-            animate={{
-                x: '0%',
-                opacity: 1
-            }}
-            exit={{
-                x: '100%',
-                opacity: 0
-            }}
+            variants={pageVariants}
+            initial="initial"
+            animate="appear"
+            exit="exit"
             transition={{ease: 'easeInOut'}}
         >
             <input onChange={e => setSearch(e.currentTarget.value)} value={search} className="search inpt" type="text" placeholder="Search"/>
@@ -120,14 +145,13 @@ export default function WordListBody() {
                 <input onChange={e => setNewDefinition(e.currentTarget.value)} value={newDefinition} className="new-definition inpt" type="text" placeholder="Definition" />
                 <button className="btn add" type="submit">+</button>
             </form>
-            <div className="words">
+            <motion.div layout="position" className="words">
                 {
                     filterBySearch(wordsState.words, search).sort(wordCmp).map(
-                        (word, idx) => <WordBlock word={word} key={`${word.word}-${idx}`}/>
+                        word => <WordBlock word={word} key={`${word.word}-${word.definition}`}/>
                     )
                 }
-            </div>
-            {/* <button className="btn reset" onClick={() => setWordsState({...wordsState, words: []})}>Reset All</button> */}
+            </motion.div>
         </motion.div>
     )
 }
