@@ -10,6 +10,14 @@
     scroll-behavior: smooth;
 }
 
+body {
+    position: relative;
+}
+
+body, html {
+    overflow-x: hidden;
+}
+
 .App {
     min-height: 100vh;
     display: flex;
@@ -82,6 +90,7 @@ textarea.inpt {
     font-weight: bold;
     text-transform: uppercase;
     height: 2em;
+    width: 100vw;
     padding-left: .5rem;
     padding-right: .5rem;
 }
@@ -116,10 +125,12 @@ textarea.inpt {
 
 .main-footer {
     display: flex;
+    bottom: -5px;
     align-items: center;
     justify-content: center;
-    position: sticky;
-    bottom: 0;
+    position: fixed;
+    min-width: 100vw;
+    height: 3rem;
 }
 
 
@@ -157,8 +168,14 @@ textarea.inpt {
 
 /* Word List Page */
 
+/*
+    There's some kind of issue on mobile
+    The vertical scroll is getting stuck around the last word
+    I don't know how ti fix it :(
+*/
 .word-list-body {
     padding: 1rem;
+    padding-bottom: 3rem;
 
     width: clamp(0px, 100%, 700px);
     margin-left: auto;
@@ -433,5 +450,6 @@ textarea.inpt {
 
     .word-list-body {
         padding: .5rem;
+        padding-bottom: 3rem;
     }
 }

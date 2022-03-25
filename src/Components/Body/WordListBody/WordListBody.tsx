@@ -3,6 +3,7 @@ import { Page, Word } from "../../../interfaces"
 import { pageContext } from "../../../Providers/PageProvider"
 import { wordStorageContext } from "../../../Providers/WordStorage"
 import { filterBySearch, filterOutEmptyWords, wordCmp } from "../../../utils"
+import { motion } from 'framer-motion' 
 
 interface WordProps {
     word : Word,
@@ -94,7 +95,22 @@ export default function WordListBody() {
     }
     
     return (
-        <div className="column word-list-body">
+        <motion.div
+            className="column word-list-body"
+            initial={{
+                x: '100%',
+                opacity: 0,
+            }}
+            animate={{
+                x: '0%',
+                opacity: 1
+            }}
+            exit={{
+                x: '100%',
+                opacity: 0
+            }}
+            transition={{ease: 'easeInOut'}}
+        >
             <input onChange={e => setSearch(e.currentTarget.value)} value={search} className="search inpt" type="text" placeholder="Search"/>
             {
                 error ? <div className="error">{error}</div> : ''
@@ -112,6 +128,6 @@ export default function WordListBody() {
                 }
             </div>
             {/* <button className="btn reset" onClick={() => setWordsState({...wordsState, words: []})}>Reset All</button> */}
-        </div>
+        </motion.div>
     )
 }

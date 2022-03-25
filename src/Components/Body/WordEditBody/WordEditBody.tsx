@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef } from "react"
 import { Page } from "../../../interfaces"
 import { pageContext } from "../../../Providers/PageProvider"
 import { wordStorageContext } from "../../../Providers/WordStorage"
+import { motion } from 'framer-motion'
 
 export default function WordEditBody() {
     const [wordsState, setWordsState] = useContext(wordStorageContext)
@@ -70,7 +71,22 @@ export default function WordEditBody() {
         })
     }    
     return (
-        <div className="word-edit-body">
+        <motion.div
+            className="word-edit-body"
+            initial={{
+                x: '-100%',
+                opacity: 0,
+            }}
+            animate={{
+                x: '0%',
+                opacity: 1
+            }}
+            exit={{
+                x: '-100%',
+                opacity: 0,
+            }}
+            transition={{ease: 'easeInOut'}}
+        >
             <div className="word-edit-block">
                 <label>Word:</label>
                 <input className="name-edit inpt" onChange={handleWordChange} type="text" value={wordsState.currentWord.word}/>
@@ -92,6 +108,6 @@ export default function WordEditBody() {
             wordsState.currentWord.definition.length === 0 ?
             <span className="error">Warning: Word will be deleted if it's defenition will be left empty</span> : ""
             }
-        </div>
+        </motion.div>
     ) 
 }

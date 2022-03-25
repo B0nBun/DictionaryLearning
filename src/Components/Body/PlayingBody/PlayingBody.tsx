@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react"
 import { GameMode, GameState, gameStateContext, GameStatus } from "../../../Providers/GameState"
 import { wordStorageContext } from "../../../Providers/WordStorage"
 import { filterOutEmptyWords, last, shuffle } from "../../../utils"
+import { motion, AnimatePresence } from 'framer-motion'
 
 const getWordJSX = (gameState : GameState, setGameState : (gameState : GameState) => void) => {
     const handleAnswer = () => {
@@ -99,7 +100,22 @@ export default function PlayingBody() {
     }
     
     return (
-        <div className="play-body">
+        <motion.div
+            className="play-body"
+            initial={{
+                x: '-100%',
+                opacity: 0,
+            }}
+            animate={{
+                x: '0%',
+                opacity: 1
+            }}
+            exit={{
+                x: '-100%',
+                opacity: 0
+            }}
+            transition={{ease: 'easeInOut'}}
+        >
             {gameState.score.total === 0 ? '' : <span className="score">{gameState.score.correct} / {gameState.score.total}</span>}
             {
                 gameState.status === GameStatus.NotPlaying ? <span className="warning">Restart to begin!</span> :
@@ -112,6 +128,6 @@ export default function PlayingBody() {
                 <button className="mode-switch btn" onClick={handleModeSwitch}>Current Mode: {gameState.gameMode}</button>
                 <button className="restart btn" onClick={handleRestart}>Restart</button>
             </div>
-        </div>
+        </motion.div>
     )
 }

@@ -4,19 +4,21 @@ import { pageContext } from "../../Providers/PageProvider"
 import PlayingBody from "./PlayingBody/PlayingBody"
 import WordListBody from "./WordListBody/WordListBody"
 import WordEditBody from "./WordEditBody/WordEditBody"
-
-const getBodyPage = (page : Page) : JSX.Element => 
-    page === Page.WordList ? <WordListBody/> :
-    page === Page.Playing  ? <PlayingBody/>  :
-    page === Page.WordEdit ? <WordEditBody/> :
-    <div>Can't display {page} page</div>
+import { AnimatePresence } from "framer-motion"
 
 export default function Body() {
     const [currentPage] = useContext(pageContext)
     
     return (
         <div className="main-body">
-            {getBodyPage(currentPage)}
+        <AnimatePresence exitBeforeEnter={true}>
+            {
+                currentPage === Page.WordList ? <WordListBody key="word-list"/> :
+                currentPage === Page.Playing  ? <PlayingBody  key="playing-body"/>  :
+                currentPage === Page.WordEdit ? <WordEditBody key="word-edit"/> :
+                <div>Can't display {currentPage} page</div>
+            }
+        </AnimatePresence>
         </div>
     )
 }
