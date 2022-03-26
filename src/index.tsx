@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './reset.css';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+ import './reset.css';
 import './utils.css';
 import App from './Components/App/App';
 import GameStateProvider, { GameStatus } from './Providers/GameState'
@@ -31,6 +32,8 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+serviceWorkerRegistration.register();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
