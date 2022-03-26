@@ -3,13 +3,15 @@ import { Page, Word } from "../../../interfaces"
 import { pageContext } from "../../../Providers/PageProvider"
 import { wordStorageContext } from "../../../Providers/WordStorage"
 import { filterBySearch, filterOutEmptyWords, wordCmp } from "../../../utils"
-import { AnimatePresence, motion, Variants } from 'framer-motion' 
+import { motion, Variants } from 'framer-motion' 
+import { notificationContext } from "../../../Providers/NotificationProvider"
 
 interface WordProps {
     word : Word,
 }
 
 const WordBlock = ({word} : WordProps) : JSX.Element => {
+    const [,notify] = useContext(notificationContext)
     const [, setCurrentPage] = useContext(pageContext)
     const [wordsState, setWordsState] = useContext(wordStorageContext)
     
@@ -32,6 +34,7 @@ const WordBlock = ({word} : WordProps) : JSX.Element => {
             ...wordsState,
             words: wordsState.words.filter(w => w.word !== word.word)
         })
+        notify(`'${word.word}' was removed`)
     }
 
     const handleWordToggle = () => {

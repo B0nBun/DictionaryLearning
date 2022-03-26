@@ -9,6 +9,7 @@ import reportWebVitals from './reportWebVitals';
 import WordStorageProvider from './Providers/WordStorage';
 import PageProvider from './Providers/PageProvider';
 import { getGameMode } from './utils';
+import NotificationProvider from './Providers/NotificationProvider';
 
 // TODO: Ability to add at least one image to definition
 // TODO: Need notification about removal of a word (meybe a button to undo)
@@ -26,7 +27,9 @@ ReactDOM.render(
   }}>
   <WordStorageProvider>
   <PageProvider>
+  <NotificationProvider>
     <App />
+  </NotificationProvider>
   </PageProvider>
   </WordStorageProvider>
   </GameStateProvider>

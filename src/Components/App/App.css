@@ -454,3 +454,16 @@ textarea.inpt {
         padding-bottom: 3rem;
     }
 }
+
+.notification {
+    --notification-bg-clr: hsla(0, 70%, 65%, .7);
+    --notification-fg-clr: #fff;
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    background-color: var(--notification-bg-clr);
+    color: var(--notification-fg-clr);
+    padding: .5em 1em;
+    border-radius: .2em;
+    font-size: 1.2rem;
+}
