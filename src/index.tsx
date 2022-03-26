@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
- import './reset.css';
+import './reset.css';
 import './utils.css';
 import App from './Components/App/App';
 import GameStateProvider, { GameStatus } from './Providers/GameState'
@@ -14,6 +14,7 @@ import NotificationProvider from './Providers/NotificationProvider';
 // TODO: Ability to add at least one image to definition
 // TODO: Need notification about removal of a word (meybe a button to undo)
 //       Otherwise accidental deletion is frustrating, since you can't tell which word you removed
+// TODO: Replace css with emotion.js (at least for the most part)
 ReactDOM.render(
   <React.StrictMode>
   <GameStateProvider state={{

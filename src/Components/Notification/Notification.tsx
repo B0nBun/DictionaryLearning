@@ -22,6 +22,9 @@ font-size: 1.2rem;
 }`)
 
 
+// TODO: Button to close notification
+//       and longer timeout before it closes itself
+// TODO: List of notifications instead of one notification
 export default function Notification() {
     const [notification] = useContext(notificationContext)
 
