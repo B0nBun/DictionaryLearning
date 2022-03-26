@@ -325,6 +325,7 @@ textarea.inpt {
     flex-direction: column;
     flex: 1 1 auto;
     padding: 1rem;
+    padding-bottom: 3rem;
 }
 
 .play-body .score {
