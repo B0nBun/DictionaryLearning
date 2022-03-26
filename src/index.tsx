@@ -10,8 +10,9 @@ import WordStorageProvider from './Providers/WordStorage';
 import PageProvider from './Providers/PageProvider';
 import { getGameMode } from './utils';
 
-// TODO: Implment some animations with framer-motion
-// TODO: PWA
+// TODO: Ability to add at least one image to definition
+// TODO: Need notification about removal of a word (meybe a button to undo)
+//       Otherwise accidental deletion is frustrating, since you can't tell which word you removed
 ReactDOM.render(
   <React.StrictMode>
   <GameStateProvider state={{
