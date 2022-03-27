@@ -22,7 +22,7 @@ export default function NotificationProvider({children} : Props) {
         setCurrentTimeout(
             setTimeout(() => {
                 setNotification("")
-            }, 2000)
+            }, 600000)
         )
         if (prevTimeout) clearTimeout(prevTimeout)        
     // eslint-disable-next-line
